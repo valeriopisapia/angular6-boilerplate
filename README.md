@@ -494,7 +494,7 @@ sonarQubeUnitReporter: {
 ```
 ___
 
-enjoy — [**PatrickJS**](https://twitter.com/gdi2290)
+enjoy :D
 
 ___
 
