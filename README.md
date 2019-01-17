@@ -42,10 +42,10 @@ This seed repo serves as an Angular starter for anyone looking to get up and run
 ```bash
 # clone our repo
 # --depth 1 removes all but one .git commit history
-git clone --depth 1 https://github.com/gdi2290/angular-starter.git
+git clone --depth 1 https://github.com/valeriopisapia/angular6-boilerplate.git
 
 # change directory to our repo
-cd angular-starter
+cd angular6-boilerplate
 
 # install the repo with npm
 npm install
