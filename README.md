@@ -1,26 +1,5 @@
-<p align="center">
-  <a href="http://www.dreaming-lab.com" target="_blank">
-    <img  alt="DreamingLab" src="http://www.dreaming-lab.com/blog/wp-content/uploads/2017/08/logo.png" class="img-responsive">
-  </a>
-</p>
-
-___
-
-[![taylor swift](https://img.shields.io/badge/secured%20by-taylor%20swift-brightgreen.svg)](https://twitter.com/SwiftOnSecurity)
-[![volkswagen status](https://auchenberg.github.io/volkswagen/volkswargen_ci.svg?v=1)](https://github.com/auchenberg/volkswagen)
-[![Build Status](https://travis-ci.org/gdi2290/angular-starter.svg?branch=master)](https://travis-ci.org/gdi2290/angular-starter)
-[![GitHub version](https://badge.fury.io/gh/gdi2290%2Fangular-starter.svg)](https://badge.fury.io/gh/gdi2290%2Fangular-starter)
-[![Dependency Status](https://david-dm.org/gdi2290/angular-starter.svg)](https://david-dm.org/gdi2290/angular-starter)
-[![Stack Share](http://img.shields.io/badge/tech-stack-0690fa.svg?style=flat)](http://stackshare.io/gdi2290/angular-starter)
-
-<p align="center">
-  <a href="https://onespeed.io" target="_blank">
-    <img src="https://cloud.githubusercontent.com/assets/1016365/26219144/aa986cfa-3bdb-11e7-9f04-7296dc9ae945.png" alt="Angular Starter" />
-  </a>
-</p>
-
-# Angular Webpack Starter [![Join the chat at https://gitter.im/angularclass/angular2-webpack-starter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/angularclass/angular2-webpack-starter?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
-
+# Angular Webpack Starter
+## based on the awesome [angular-starter](https://github.com/gdi2290/angular-starter)
 
 > An Angular starter kit featuring [Angular 6](https://angular.io), [Ahead of Time Compile](https://angular.io/docs/ts/latest/cookbook/aot-compiler.html), [Router](https://angular.io/docs/ts/latest/guide/router.html), [Forms](https://angular.io/docs/ts/latest/guide/forms.html),
 [Http](https://angular.io/docs/ts/latest/guide/server-communication.html),
@@ -30,7 +9,11 @@ ___
 > If you're looking to learn about Webpack and ES6 Build Tools check out [ES6-build-tools](https://github.com/AngularClass/ES6-build-tools)
 > If you're looking to learn TypeScript see [TypeStrong/learn-typescript](https://github.com/TypeStrong/learn-typescript)
 
-This seed repo serves as an Angular starter for anyone looking to get up and running with Angular and TypeScript fast. Using a [Webpack 4](https://webpack.js.org) for building our files and assisting with boilerplate. We're also using Protractor for our end-to-end story and Karma for our unit tests.
+This seed repo serves as an Angular starter for anyone looking to get up and running with Angular and TypeScript fast. 
+> Also it implements the [single-spa](https://single-spa.js.org) logic for an angular application (It has been tested on Angular 6. It should work well on 7 as well).
+* [Registered application lifecycle](https://single-spa.js.org/docs/building-applications.html#registered-application-lifecycle)
+
+Using a [Webpack 4](https://webpack.js.org) for building our files and assisting with boilerplate. We're also using Protractor for our end-to-end story and Karma for our unit tests.
 * Best practices in file and application organization for Angular.
 * Ready to go build system using Webpack for working with TypeScript.
 * Angular examples that are ready to go when experimenting with Angular.
@@ -50,10 +33,10 @@ This seed repo serves as an Angular starter for anyone looking to get up and run
 ```bash
 # clone our repo
 # --depth 1 removes all but one .git commit history
-git clone --depth 1 https://github.com/gdi2290/angular-starter.git
+git clone --depth 1 https://github.com/valeriopisapia/angular6-boilerplate.git
 
 # change directory to our repo
-cd angular-starter
+cd angular6-boilerplate
 
 # install the repo with npm
 npm install
@@ -103,7 +86,9 @@ angular-starter/
  |   ├──protractor.conf.js         * protractor config for our end-to-end tests
  │   ├──webpack.common.js          * common tasks for webpack build process shared for dev and prod
  │   ├──webpack.dev.js             * our development webpack config
- │   ├──webpack.prod.js            * our production webpack config
+     ├──webpack.singlespa.dev.js   * our development webpack config for single-spa
+ │   ├──webpack.prod.js            * our production webpack config for single-spa
+     ├──webpack.singlespa.prod.js  * our production webpack config
  │   └──webpack.test.js            * our testing webpack config
  │
  ├──src/                           * our source files that will be compiled to javascript
@@ -167,6 +152,19 @@ npm run server
 # production
 npm run build:prod
 npm run server:prod
+```
+
+## Single Spa commands
+``` bash
+# start the server - development
+npm run start:single-spa-dev
+
+# build files for development
+npm run build:single-spa:dev
+
+# build files for production
+npm run build:single-spa:prod
+
 ```
 
 ## Other commands
@@ -502,7 +500,7 @@ sonarQubeUnitReporter: {
 ```
 ___
 
-enjoy — [**PatrickJS**](https://twitter.com/gdi2290)
+enjoy :D
 
 ___
 
