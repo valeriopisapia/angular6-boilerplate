@@ -57,6 +57,7 @@ go to [http://0.0.0.0:3000](http://0.0.0.0:3000) or [http://localhost:3000](http
 * [Getting Started](#getting-started)
     * [Dependencies](#dependencies)
     * [Installing](#installing)
+    * [Single Spa Configuration](#single-spa-configuration)
     * [Running the app](#running-the-app)
 * [Configuration](#configuration)
 * [AoT Don'ts](#aot-donts)
@@ -142,6 +143,8 @@ Once you have those, you should install these globals with `npm install --global
 * `npm install` to install all dependencies or `yarn`
 * `npm run server` to start the dev server in another tab
 
+## Single Spa Configuration
+TODO
 ## Running the app
 After you have installed all dependencies you can now run the app. Run `npm run server` to start a local server using `webpack-dev-server` which will watch, build (in-memory), and reload for you. The port will be displayed to you as `http://0.0.0.0:3000` (or if you prefer IPv6, if you're using `express` server, then it's `http://[::1]:3000/`).
 
