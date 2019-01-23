@@ -1,26 +1,26 @@
 /**
  * @author: Valerio Pisapia <pisa.vale@gmail.com>
  */
-const helpers = require('./helpers');
-const buildUtils = require('./build-utils');
+const helpers = require("./helpers");
+const buildUtils = require("./build-utils");
 
 /**
  * Used to merge webpack configs
  */
-const webpackMerge = require('webpack-merge');
+const webpackMerge = require("webpack-merge");
 
 /**
  * The settings that are common to prod and dev
  */
-const commonConfig = require('./webpack.common.js');
+const commonConfig = require("./webpack.common.js");
 
 /**
  * Webpack Plugins
  */
 
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const HashedModuleIdsPlugin = require('webpack/lib/HashedModuleIdsPlugin');
-const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const HashedModuleIdsPlugin = require("webpack/lib/HashedModuleIdsPlugin");
+const UglifyJsPlugin = require("uglifyjs-webpack-plugin");
 
 /***
  * Ref: https://github.com/mishoo/UglifyJS2/tree/harmony#minify-options
@@ -50,23 +50,29 @@ function getUglifyOptions(supportES2015, enableCompress) {
 }
 
 module.exports = function(env) {
-  const ENV = (process.env.NODE_ENV = process.env.ENV = 'production');
-  const supportES2015 = buildUtils.supportES2015(buildUtils.DEFAULT_METADATA.tsConfigPath);
-  const sourceMapEnabled = process.env.SOURCE_MAP === '1';
+  const isProd = process.env.NODE_ENV === "production";
+  const APP_CONFIG = require(process.env.ANGULAR_CONF_FILE ||
+    (isProd ? "./config.prod.json" : "./config.dev.json"));
+
+  const ENV = (process.env.NODE_ENV = process.env.ENV = "production");
+  const supportES2015 = buildUtils.supportES2015(
+    buildUtils.DEFAULT_METADATA.tsConfigPath
+  );
+  const sourceMapEnabled = process.env.SOURCE_MAP === "1";
   const METADATA = Object.assign({}, buildUtils.DEFAULT_METADATA, {
-    host: process.env.HOST || 'localhost',
-    port: process.env.PORT || 8080,
+    host: APP_CONFIG.HOST || "localhost",
+    port: APP_CONFIG.PORT || 8080,
     ENV: ENV,
     HMR: false
   });
 
   // set environment suffix so these environments are loaded.
-  METADATA.envFileSuffix = METADATA.E2E ? 'e2e.prod' : 'prod';
+  METADATA.envFileSuffix = METADATA.E2E ? "e2e.prod" : "prod";
 
   return webpackMerge(commonConfig({ env: ENV, metadata: METADATA }), {
-    mode: 'production',
+    mode: "production",
 
-    devtool: 'source-map',
+    devtool: "source-map",
 
     /**
      * Options affecting the output of the compilation.
@@ -79,7 +85,7 @@ module.exports = function(env) {
        *
        * See: https://webpack.js.org/configuration/output/#output-path
        */
-      path: helpers.root('dist'),
+      path: helpers.root("dist"),
 
       /**
        * Specifies the name of each output file on disk.
@@ -87,7 +93,7 @@ module.exports = function(env) {
        *
        * See: https://webpack.js.org/configuration/output/#output-filename
        */
-      filename: '[name].bundle.js',
+      filename: "[name].bundle.js",
 
       /**
        * The filename of the SourceMaps for the JavaScript files.
@@ -95,7 +101,7 @@ module.exports = function(env) {
        *
        * See: https://webpack.js.org/configuration/output/#output-sourcemapfilename
        */
-      sourceMapFilename: '[file].map',
+      sourceMapFilename: "[file].map",
 
       /**
        * The filename of non-entry chunks as relative path
@@ -103,7 +109,7 @@ module.exports = function(env) {
        *
        * See: https://webpack.js.org/configuration/output/#output-chunkfilename
        */
-      chunkFilename: '[name].[chunkhash].chunk.js'
+      chunkFilename: "[name].[chunkhash].chunk.js"
     },
 
     module: {
@@ -113,8 +119,8 @@ module.exports = function(env) {
          */
         {
           test: /\.css$/,
-          use: [MiniCssExtractPlugin.loader, 'css-loader'],
-          include: [helpers.root('src', 'styles')]
+          use: [MiniCssExtractPlugin.loader, "css-loader"],
+          include: [helpers.root("src", "styles")]
         },
 
         /**
@@ -122,13 +128,26 @@ module.exports = function(env) {
          */
         {
           test: /\.scss$/,
-          use: [MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader'],
-          include: [helpers.root('src', 'styles')]
+          use: [MiniCssExtractPlugin.loader, "css-loader", "sass-loader"],
+          include: [helpers.root("src", "styles")]
         }
       ]
     },
 
     optimization: {
+      /**
+       * Plugin: SplitChunksPlugin
+       * Description: https://webpack.js.org/plugins/split-chunks-plugin/
+       */
+      splitChunks: {
+        cacheGroups: {
+          commons: {
+            test: /[\\/]node_modules[\\/]/,
+            name: "vendors",
+            chunks: "all"
+          }
+        }
+      },
       minimizer: [
         /**
          * Plugin: UglifyJsPlugin
@@ -142,13 +161,10 @@ module.exports = function(env) {
         new UglifyJsPlugin({
           sourceMap: sourceMapEnabled,
           parallel: true,
-          cache: helpers.root('webpack-cache/uglify-cache'),
+          cache: helpers.root("webpack-cache/uglify-cache"),
           uglifyOptions: getUglifyOptions(supportES2015, true)
         })
-      ],
-      splitChunks: {
-        chunks: 'all'
-      }
+      ]
     },
 
     /**
@@ -157,7 +173,10 @@ module.exports = function(env) {
      * See: https://webpack.js.org/configuration/plugins/
      */
     plugins: [
-      new MiniCssExtractPlugin({ filename: '[name]-[hash].css', chunkFilename: '[name]-[chunkhash].css' }),
+      new MiniCssExtractPlugin({
+        filename: "[name]-[hash].css",
+        chunkFilename: "[name]-[chunkhash].css"
+      }),
       new HashedModuleIdsPlugin()
     ],
 
@@ -169,12 +188,12 @@ module.exports = function(env) {
      */
     node: {
       global: true,
-      crypto: 'empty',
+      crypto: "empty",
       process: false,
       module: false,
       clearImmediate: false,
       setImmediate: false,
-      fs: 'empty'
+      fs: "empty"
     }
   });
 };
