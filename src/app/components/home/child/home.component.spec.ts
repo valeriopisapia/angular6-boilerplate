@@ -12,9 +12,9 @@ import { HttpClientTestingModule, HttpTestingController } from '@angular/common/
 /**
  * Load the implementations that should be tested.
  */
-import { AppState } from '../../app.service';
+import { AppState } from '../../../app.service';
 import { HomeComponent } from './home.component';
-import { Title } from './title';
+import { Title } from './../title';
 
 describe(`Home`, () => {
   let comp: HomeComponent;

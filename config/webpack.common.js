@@ -38,6 +38,7 @@ module.exports = function(options) {
 
   const ngcWebpackConfig = buildUtils.ngcWebpackSetup(isProd, METADATA);
   const supportES2015 = buildUtils.supportES2015(METADATA.tsConfigPath);
+  const ASSET_PATH = options.asset_path ? options.asset_path : process.env.ASSET_PATH || "/";
 
   const entry = {
     polyfills: "./src/polyfills.browser.ts",
@@ -188,7 +189,8 @@ module.exports = function(options) {
         AOT: METADATA.AOT,
         "process.env.ENV": JSON.stringify(METADATA.ENV),
         "process.env.NODE_ENV": JSON.stringify(METADATA.ENV),
-        "process.env.HMR": METADATA.HMR
+        "process.env.HMR": METADATA.HMR,
+        "process.env.ASSET_PATH": JSON.stringify(ASSET_PATH)
         // 'FIREBASE_CONFIG': JSON.stringify(APP_CONFIG.firebase),
       }),
 

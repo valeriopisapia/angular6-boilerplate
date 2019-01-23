@@ -1,3 +1,5 @@
 {
-  
+  "HOST": "localhost",
+  "PORT": "4300",
+  "ASSET_PATH": "http://localhost:4300/"
 }

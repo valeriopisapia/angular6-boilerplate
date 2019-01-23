@@ -15,9 +15,9 @@ import { ROUTES } from "./app.routes";
 import { AppComponent } from "./app.component";
 import { APP_RESOLVER_PROVIDERS } from "./app.resolver";
 import { AppState, InternalStateType } from "./app.service";
-import { HomeComponent } from "./containers/home";
+// import { HomeComponent } from "./containers/home";
 import { NoContentComponent } from "./components/no-content";
-import { XLargeDirective } from "./containers/home/x-large";
+import { XLargeDirective } from "./components/home/x-large";
 import { DevModuleModule } from "./components/+dev-module";
 
 import "../styles/styles.scss";
@@ -39,7 +39,6 @@ interface StoreType {
   bootstrap: [AppComponent],
   declarations: [
     AppComponent,
-    HomeComponent,
     NoContentComponent,
     XLargeDirective
   ],
@@ -53,7 +52,7 @@ interface StoreType {
     HttpClientModule,
     RouterModule.forRoot(ROUTES, {
       useHash: Boolean(history.pushState) === false,
-      preloadingStrategy: PreloadAllModules
+      preloadingStrategy: PreloadAllModules  // Good to know: https://medium.com/@adrianfaciu/custom-preloading-strategy-for-angular-modules-b3b5c873681a 
     }),
 
     /**

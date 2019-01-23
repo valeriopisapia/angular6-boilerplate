@@ -18,9 +18,12 @@ const LoaderOptionsPlugin = require('webpack/lib/LoaderOptionsPlugin');
  * See: https://webpack.js.org/configuration/
  */
 module.exports = function(options) {
-  const ENV = (process.env.ENV = process.env.NODE_ENV = 'development');
-  const HOST = process.env.HOST || 'localhost';
-  const PORT = process.env.PORT || 4300;
+  const isProd = process.env.NODE_ENV === "production";
+  const APP_CONFIG = require(process.env.ANGULAR_CONF_FILE ||
+    (isProd ? "./config.prod.json" : "./config.dev.json"));
+  const ENV = (process.env.ENV = process.env.NODE_ENV = "development");
+  const HOST = APP_CONFIG.HOST || "localhost";
+  const PORT = APP_CONFIG.PORT || 4300;
 
   const entry = {
     polyfills: './src/polyfills.browser.ts',
@@ -32,7 +35,7 @@ module.exports = function(options) {
     port: PORT,
     ENV: ENV,
     HMR: helpers.hasProcessFlag('hot'),
-    PUBLIC: process.env.PUBLIC_DEV || HOST + ':' + PORT
+    PUBLIC: HOST + ":" + PORT
   });
 
   const ngcWebpackConfig = buildUtils.ngcWebpackSetup(false, METADATA);
