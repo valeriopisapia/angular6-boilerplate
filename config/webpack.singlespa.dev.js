@@ -28,7 +28,8 @@ module.exports = function(options) {
   const entry = {
     polyfills: "./src/polyfills.browser.ts",
     main: "./src/main.browser.ts",
-    singleSpaEntry: "./src/singleSpaEntry.ts"
+    singleSpaEntry: "./src/singleSpaEntry.ts",
+    store: "./src/app/core/store/index.ts"
   };
 
   const METADATA = Object.assign({}, buildUtils.DEFAULT_METADATA, {

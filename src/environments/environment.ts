@@ -11,7 +11,7 @@ require('zone.js/dist/long-stack-trace-zone');
 
 export const environment: Environment = {
   production: false,
-
+  api_url: " https://webmail.aruba.it/",
   showDevModule: true,
 
   /** Angular debug tools in the dev console

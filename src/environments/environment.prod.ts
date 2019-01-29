@@ -9,6 +9,7 @@ enableProdMode();
 
 export const environment: Environment = {
   production: true,
+  api_url: " https://webmail.aruba.it/",
   showDevModule: false,
 
   /** Angular debug tools in the dev console

@@ -82,6 +82,7 @@
     "webpack": "node --max_old_space_size=4096 node_modules/webpack/bin/webpack.js"
   },
   "dependencies": {
+    "@angular-redux/store": "^9.0.0",
     "@angular/animations": "^6.0.6",
     "@angular/common": "^6.0.6",
     "@angular/compiler": "^6.0.6",
@@ -91,9 +92,16 @@
     "@angular/platform-browser-dynamic": "^6.0.6",
     "@angular/platform-server": "^6.0.6",
     "@angular/router": "^6.0.6",
+    "@ngrx/core": "^1.2.0",
+    "@ngrx/effects": "^6.0.6",
+    "@ngrx/entity": "^6.0.6",
+    "@ngrx/router-store": "^6.0.6",
+    "@ngrx/store": "^6.0.6",
+    "@ngrx/store-devtools": "^6.0.6",
     "core-js": "^2.5.7",
     "http-server": "^0.11.1",
     "ie-shim": "^0.1.0",
+    "redux": "^4.0.1",
     "reflect-metadata": "^0.1.12",
     "rxjs": "^6.2.1",
     "zone.js": "^0.8.26"

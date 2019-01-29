@@ -10,7 +10,7 @@ import {
  * Load the implementations that should be tested
  */
 import { AppComponent } from './app.component';
-import { AppState } from './app.service';
+import { AppState } from './services/app.service';
 
 describe(`App`, () => {
   let comp: AppComponent;
